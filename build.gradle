@@ -1,0 +1,29 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+    }
+}
+
+configure([project(':producer'), project(':consumer')]) {
+
+    apply plugin: 'spring-boot'
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        compile(project(":common"))
+        compile 'org.springframework.boot:spring-boot-starter-web'
+        compile 'org.springframework.boot:spring-boot-starter-amqp'
+        testCompile 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+}
+
+configure(project(':common')) {
+    apply plugin: 'java'
+}
